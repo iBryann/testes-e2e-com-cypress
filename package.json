@@ -1,0 +1,10 @@
+{
+  "name": "testes-e2e-com-cypress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Bryann Henrique <bryann.enrique@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "12.15.0"
+  }
+}
