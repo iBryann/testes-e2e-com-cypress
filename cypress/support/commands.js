@@ -18,7 +18,10 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (emai, password) => {
   });
 });
 
-Cypress.Commands.add('login', (email, password) => {
+Cypress.Commands.add('guiLogin', (
+  email = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD')
+) => {
   cy.intercept('GET', '**/notes').as('getNotes');
 
   cy.visit('/login');
@@ -26,4 +29,13 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('#password').type(password, { log: false });
   cy.contains('button', 'Login').click();
   cy.wait('@getNotes');
+});
+
+Cypress.Commands.add('sessionLogin', (
+  email = Cypress.env('USER_EMAIL'),
+  password = Cypress.env('USER_PASSWORD')
+) => {
+  const loginFunc = () => cy.guiLogin(email, password);
+
+  cy.session(email, loginFunc);
 });
